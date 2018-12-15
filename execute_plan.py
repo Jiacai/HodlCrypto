@@ -19,6 +19,8 @@ for p in prices:
 
 print ''
 print '*' * 30
+print '!' * 10, 'PLAN', '!' * 10
+print '*' * 30
 
 price_dict = {}
 
