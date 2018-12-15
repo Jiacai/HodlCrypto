@@ -89,7 +89,7 @@ for symbol in plan:
             comment = 'NO'
     amount = total
     if symbol != 'BTC':
-        amount = total / price_dict[symbol + 'BTC']
+        amount = total * abs(ratio) / price_dict[symbol + 'BTC']
     if ratio > 0.0:
         print 'BUY', symbol, amount, ':', money, 'USDT', comment
     else:
