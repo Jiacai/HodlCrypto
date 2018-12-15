@@ -87,10 +87,13 @@ for symbol in plan:
     if symbol != 'BTC' and (symbol + 'BTC') in min_notional_dict:
         if abs(ratio) * total < min_notional_dict[symbol + 'BTC']:
             comment = 'NO'
+    amount = total
+    if symbol != 'BTC':
+        amount = total / price_dict[symbol + 'BTC']
     if ratio > 0.0:
-        print 'BUY', symbol, money, 'USDT', comment
+        print 'BUY', symbol, amount, ':', money, 'USDT', comment
     else:
-        print 'SELL', symbol, money, 'USDT', comment
+        print 'SELL', symbol, amount, ':', money, 'USDT', comment
     diff_moeny += money
 print '*' * 30
 print 'TOTAL TRADE', diff_moeny, 'USDT'
