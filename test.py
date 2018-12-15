@@ -25,6 +25,7 @@ price_dict = {}
 for item in prices:
     price_dict[item['symbol']] = float(item['price'])
 
+total = 0.0
 info = client.get_account()
 for item in info['balances']:
     if float(item['free']) > 0.0:
@@ -35,4 +36,12 @@ for item in info['balances']:
             if symbol not in price_dict:
                 continue
             k = price_dict[symbol]
+        # ignore minor balances
+        if float(item['free']) < 0.0001:
+            continue
         print item['asset'], item['free'], float(item['free']) * k
+        total += float(item['free']) * k
+
+print '*' * 30
+btc_price = price_dict['BTCUSDT']
+print 'total', total, 'BTC,', btc_price * total, 'USDT'
