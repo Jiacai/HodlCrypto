@@ -22,8 +22,14 @@ for line in open('target.csv'):
     if symbol not in all_symbols:
         all_symbols.append(symbol)
 
+# not need to process BTC, view it as digital cash
+# we first sell some alts to BTC
+# then buy other alts with BTC
+# then that's done
 lines_of_text = []
 for symbol in all_symbols:
+    if symbol == 'BTC':
+        continue
     current = 0.0
     if symbol in current_ptfl:
         current = current_ptfl[symbol]
