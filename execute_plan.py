@@ -101,6 +101,11 @@ print '*' * 30
 print 'TOTAL TRADE', diff_moeny, 'USDT'
 print '*' * 30
 
-print executions
+sorted(executions, key=lambda x: x[0])
+executions = sort(executions)
+for exe in executions:
+    print exe
+
+
 
 
