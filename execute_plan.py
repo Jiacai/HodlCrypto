@@ -71,17 +71,34 @@ btc_price = price_dict['BTCUSDT']
 print 'total', total, 'BTC,', btc_price * total, 'USDT'
 print '*' * 30
 
+MIN_NOTIONAL
+
+min_notional_dict = {}
+exchange_info = get_exchange_info()
+for s in exchange_info['symbols']:
+    filters = s['filters']
+    for filter in filters:
+        if filter['filterType'] == 'MIN_NOTIONAL':
+            min_notional_dict[s['symbol']] = float(filter['minNotional'])
+
 diff_moeny = 0.0
 for symbol in plan:
     ratio = plan[symbol]
     money = abs(ratio) * btc_price * total
+    comment = 'YES'
+    if symbol != 'BTC' and (symbol + 'BTC') in min_notional_dict:
+        if abs(ratio) * total < min_notional_dict[symbol + 'BTC']:
+            comment = 'NO'
     if ratio > 0.0:
-        print 'BUY', symbol, money, 'USDT'
+        print 'BUY', symbol, money, 'USDT', comment
     else:
-        print 'SELL', symbol, money, 'USDT'
+        print 'SELL', symbol, money, 'USDT', comment
     diff_moeny += money
-
+print '*' * 30
 print 'TOTAL TRADE', diff_moeny, 'USDT'
 print '*' * 30
+
+
+
 
 
