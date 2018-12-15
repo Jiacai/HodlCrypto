@@ -34,7 +34,7 @@ for symbol in all_symbols:
 
     diff = target - current
     text = str(symbol) + ', ' + str(diff) + '\n'
-    print text
+    print str(symbol) + ', ' + str(diff)
     lines_of_text.append(text)
 
 fh = open('plan.csv', 'w')
