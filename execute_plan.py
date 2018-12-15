@@ -71,6 +71,7 @@ btc_price = price_dict['BTCUSDT']
 print 'total', total, 'BTC,', btc_price * total, 'USDT'
 print '*' * 30
 
+diff_moeny = 0.0
 for symbol in plan:
     ratio = plan[symbol]
     money = abs(ratio) * btc_price * total
@@ -78,3 +79,9 @@ for symbol in plan:
         print 'BUY', symbol, money, 'USDT'
     else:
         print 'SELL', symbol, money, 'USDT'
+    diff_moeny += money
+
+print 'TOTAL TRADE', diff_moeny, 'USDT'
+print '*' * 30
+
+
