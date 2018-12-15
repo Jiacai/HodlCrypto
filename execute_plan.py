@@ -3,6 +3,7 @@
 from binance.client import Client
 import json
 import os
+import time
 
 with open('config.json') as config_file:    
     config = json.load(config_file)
@@ -109,7 +110,7 @@ answer = raw_input("you really want to rebalance?")
 if answer == 'Y' or answer == 'y':
     print 'executing...'
     for exe in executions:
-        sleep(1)
+        time.sleep(1)
         try:
             print 'LOT_SIZE', lot_size_dict[exe[1]+'BTC']
             precision = round(np.log(lot_size_dict[exe[1]+'BTC'])/np.log(10))
