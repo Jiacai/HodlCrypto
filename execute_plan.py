@@ -106,7 +106,7 @@ executions = sorted(executions, key=lambda x: x[0])
 for exe in executions:
     print exe
 print '!' * 30
-answer = input("you really want to rebalance?")
+answer = raw_input("you really want to rebalance?")
 if answer == 'Y' or answer == 'y':
     print 'executing...'
 else:
