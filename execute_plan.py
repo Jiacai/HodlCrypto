@@ -109,16 +109,22 @@ answer = raw_input("you really want to rebalance?")
 if answer == 'Y' or answer == 'y':
     print 'executing...'
     for exe in executions:
+        sleep(1)
         try:
             print 'LOT_SIZE', lot_size_dict[exe[1]+'BTC']
+            precision = round(np.log(lot_size_dict[exe[1]+'BTC'])/np.log(10))
+            if precision >= 0:
+                round_size = 0
+            else:
+                round_size = int(-precision)
             if exe[0] == -1:
                 order = client.order_market_sell(
                     symbol=exe[1]+'BTC',
-                    quantity=exe[2])
+                    quantity=round(exe[2], round_size))
             elif exe[0] == 1:
                 order = client.order_market_buy(
                     symbol=exe[1]+'BTC',
-                    quantity=exe[2])
+                    quantity=round(exe[2], round_size))
             else:
                 print 'ERROR'
             print order
