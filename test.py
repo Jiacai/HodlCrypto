@@ -60,7 +60,7 @@ for item in info['balances']:
         # ignore minor balances
         if float(item['free']) * k < 0.0001:
             continue
-        text = str(item['asset']) + ', ' + str(float(item['free']) * k / total)
+        text = str(item['asset']) + ', ' + str(float(item['free']) * k / total) + '\n'
         lines_of_text.append(text)
 
 fh = open('current.csv', 'w')
