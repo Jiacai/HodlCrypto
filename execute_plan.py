@@ -72,12 +72,15 @@ print '*' * 30
 
 # not used
 min_notional_dict = {}
+lot_size_dict = {}
 exchange_info = client.get_exchange_info()
 for s in exchange_info['symbols']:
     filters = s['filters']
     for filter in filters:
         if filter['filterType'] == 'MIN_NOTIONAL':
             min_notional_dict[s['symbol']] = float(filter['minNotional'])
+        if filter['filterType'] == 'LOT_SIZE':
+            lot_size_dict[s['symbol']] = float(filter['minQty'])
 
 diff_moeny = 0.0
 executions = []
@@ -107,6 +110,7 @@ if answer == 'Y' or answer == 'y':
     print 'executing...'
     for exe in executions:
         try:
+            print 'LOT_SIZE', lot_size_dict[exe[1]+'BTC']
             if exe[0] == -1:
                 order = client.order_market_sell(
                     symbol=exe[1]+'BTC',
