@@ -110,17 +110,21 @@ answer = raw_input("you really want to rebalance?")
 if answer == 'Y' or answer == 'y':
     print 'executing...'
     for exe in executions:
-        if exe[0] == -1:
-            order = client.order_market_sell(
-                symbol=exe[1]+'BTC',
-                quantity=exe[2])
-        elif exe[0] == 1:
-            order = client.order_market_buy(
-                symbol=exe[1]+'BTC',
-                quantity=exe[2])
-        else:
-            print 'ERROR'
-        print order
+        try:
+            if exe[0] == -1:
+                order = client.order_market_sell(
+                    symbol=exe[1]+'BTC',
+                    quantity=exe[2])
+            elif exe[0] == 1:
+                order = client.order_market_buy(
+                    symbol=exe[1]+'BTC',
+                    quantity=exe[2])
+            else:
+                print 'ERROR'
+            print order
+        except binance.exceptions.BinanceAPIException as exception:
+            print 'EXCEPTION', exception
+            print exe
 
     # clear plan csv to avoid re-exec
     os.remove("plan.csv")
