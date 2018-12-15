@@ -47,6 +47,7 @@ btc_price = price_dict['BTCUSDT']
 print 'total', total, 'BTC,', btc_price * total, 'USDT'
 print '*' * 30
 # print current portfolio
+lines_of_text = []
 for item in info['balances']:
     if float(item['free']) > 0.0:
         if item['asset'] == 'BTC':
@@ -59,4 +60,9 @@ for item in info['balances']:
         # ignore minor balances
         if float(item['free']) * k < 0.0001:
             continue
-        print item['asset'], ',', float(item['free']) * k / total
+        text = str(item['asset']) + ', ' + str(float(item['free']) * k / total)
+        lines_of_text.append(text)
+
+fh = open('current.csv', 'w')
+fh.writelines(lines_of_text) 
+fh.close() 
