@@ -40,8 +40,6 @@ print '*' * 30
 valid = True
 
 for symbol in plan:
-    if symbol == 'BTC':
-        continue
     if symbol + 'BTC' not in price_dict:
         print 'symbol does not exist: ', symbol
         valid = False
@@ -80,26 +78,29 @@ for s in exchange_info['symbols']:
             min_notional_dict[s['symbol']] = float(filter['minNotional'])
 
 diff_moeny = 0.0
+executions = []
 for symbol in plan:
     ratio = plan[symbol]
     money = abs(ratio) * btc_price * total
-    comment = 'YES'
-    if symbol != 'BTC' and (symbol + 'BTC') in min_notional_dict:
+    flag = 'YES'
+    if (symbol + 'BTC') in min_notional_dict:
         if abs(ratio) * total < min_notional_dict[symbol + 'BTC']:
-            comment = 'NO'
+            flag = 'NO'
     amount = total
-    if symbol != 'BTC':
-        amount = total * abs(ratio) / price_dict[symbol + 'BTC']
+    amount = total * abs(ratio) / price_dict[symbol + 'BTC']
     if ratio > 0.0:
-        print 'BUY', symbol, amount, ':', money, 'USDT', comment
+        print 'BUY', symbol, amount, ':', money, 'USDT', flag
+        if flag == 'YES':
+            executions.append([1, symbol, amount])
     else:
-        print 'SELL', symbol, amount, ':', money, 'USDT', comment
+        print 'SELL', symbol, amount, ':', money, 'USDT', flag
+        if flag == 'YES':
+            executions.append([-1, symbol, amount])
     diff_moeny += money
 print '*' * 30
 print 'TOTAL TRADE', diff_moeny, 'USDT'
 print '*' * 30
 
-
-
+print executions
 
 
