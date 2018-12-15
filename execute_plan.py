@@ -100,11 +100,19 @@ for symbol in plan:
 print '*' * 30
 print 'TOTAL TRADE', diff_moeny, 'USDT'
 print '*' * 30
-
+# first sell to BTC
+# then buy from BTC
 executions = sorted(executions, key=lambda x: x[0])
 for exe in executions:
     print exe
+print '!' * 30
+answer = input("you really want to rebalance?")
+if answer == 'Y' or answer == 'y':
+    print 'executing...'
+else:
+    print 'exiting...'
+    exit()
 
-
+# os.remove("plan.csv")
 
 
