@@ -49,6 +49,7 @@ for alt in alt_lst:
         if alt in symbols:
             alt = symbols[alt]
         text = str(alt) + ', ' + str(ratio) + '\n'
+        lines_of_text.append(text)
 
 fh = open('target.csv', 'w')
 fh.writelines(lines_of_text) 
