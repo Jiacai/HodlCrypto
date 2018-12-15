@@ -33,8 +33,8 @@ for symbol in all_symbols:
         target = target_ptfl[symbol]
 
     diff = target - current
-    print symbol, diff
     text = str(symbol) + ', ' + str(diff) + '\n'
+    print text
     lines_of_text.append(text)
 
 fh = open('plan.csv', 'w')
