@@ -48,3 +48,27 @@ for symbol in plan:
 
 if not valid:
     exit()
+
+total = 0.0
+info = client.get_account()
+for item in info['balances']:
+    if float(item['free']) > 0.0:
+        if item['asset'] == 'BTC':
+            k = 1.0
+        else:
+            symbol = item['asset'] + 'BTC'
+            if symbol not in price_dict:
+                continue
+            k = price_dict[symbol]
+        # ignore minor balances
+        if float(item['free']) * k < 0.0001:
+            continue
+        print item['asset'], item['free'], float(item['free']) * k
+        total += float(item['free']) * k
+
+print '*' * 30
+btc_price = price_dict['BTCUSDT']
+print 'total', total, 'BTC,', btc_price * total, 'USDT'
+print '*' * 30
+
+
