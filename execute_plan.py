@@ -2,6 +2,7 @@
 
 from binance.client import Client
 import json
+import os
 
 with open('config.json') as config_file:    
     config = json.load(config_file)
@@ -69,6 +70,7 @@ btc_price = price_dict['BTCUSDT']
 print 'total', total, 'BTC,', btc_price * total, 'USDT'
 print '*' * 30
 
+# not used
 min_notional_dict = {}
 exchange_info = client.get_exchange_info()
 for s in exchange_info['symbols']:
@@ -82,20 +84,14 @@ executions = []
 for symbol in plan:
     ratio = plan[symbol]
     money = abs(ratio) * btc_price * total
-    flag = 'YES'
-    if (symbol + 'BTC') in min_notional_dict:
-        if abs(ratio) * total < min_notional_dict[symbol + 'BTC']:
-            flag = 'NO'
     amount = total
     amount = total * abs(ratio) / price_dict[symbol + 'BTC']
     if ratio > 0.0:
-        print 'BUY', symbol, amount, ':', money, 'USDT', flag
-        if flag == 'YES':
-            executions.append([1, symbol, amount])
+        print 'BUY', symbol, amount, ':', money, 'USDT'
+        executions.append([1, symbol, amount])
     else:
-        print 'SELL', symbol, amount, ':', money, 'USDT', flag
-        if flag == 'YES':
-            executions.append([-1, symbol, amount])
+        print 'SELL', symbol, amount, ':', money, 'USDT'
+        executions.append([-1, symbol, amount])
     diff_moeny += money
 print '*' * 30
 print 'TOTAL TRADE', diff_moeny, 'USDT'
@@ -122,8 +118,8 @@ if answer == 'Y' or answer == 'y':
             else:
                 print 'ERROR'
             print order
-        except binance.exceptions.BinanceAPIException as exception:
-            print 'EXCEPTION', exception
+        except Exception as exception:
+            print exception
             print exe
 
     # clear plan csv to avoid re-exec
