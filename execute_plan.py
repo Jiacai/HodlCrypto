@@ -71,10 +71,8 @@ btc_price = price_dict['BTCUSDT']
 print 'total', total, 'BTC,', btc_price * total, 'USDT'
 print '*' * 30
 
-MIN_NOTIONAL
-
 min_notional_dict = {}
-exchange_info = get_exchange_info()
+exchange_info = client.get_exchange_info()
 for s in exchange_info['symbols']:
     filters = s['filters']
     for filter in filters:
