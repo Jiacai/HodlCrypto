@@ -4,6 +4,7 @@ from binance.client import Client
 import json
 import os
 import time
+import numpy as np
 
 with open('config.json') as config_file:    
     config = json.load(config_file)
