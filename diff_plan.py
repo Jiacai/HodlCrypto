@@ -22,6 +22,7 @@ for line in open('target.csv'):
     if symbol not in all_symbols:
         all_symbols.append(symbol)
 
+lines_of_text = []
 for symbol in all_symbols:
     current = 0.0
     if symbol in current_ptfl:
@@ -33,4 +34,9 @@ for symbol in all_symbols:
 
     diff = target - current
     print symbol, diff
+    text = str(symbol) + ', ' + str(diff) + '\n'
+    lines_of_text.append(text)
 
+fh = open('plan.csv', 'w')
+fh.writelines(lines_of_text) 
+fh.close() 
