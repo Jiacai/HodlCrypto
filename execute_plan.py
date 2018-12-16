@@ -16,10 +16,6 @@ client = Client(api_key, api_secret)
 
 prices = client.get_all_tickers()
 
-print '*' * 30
-for p in prices:
-    print p['symbol'], ',', 
-
 print ''
 print '*' * 30
 print '!' * 10, 'PLAN', '!' * 10
