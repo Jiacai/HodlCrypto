@@ -31,7 +31,13 @@ mapping = {
     'omisego': 'OMG',
     'basic-attention-token': 'BAT',
     'qtum': 'QTUM',
-    'ontology': 'ONT'
+    'ontology': 'ONT',
+    '0x': 'ZRX',
+    'decred': 'DCR',
+    'lisk': 'LSK',
+    'nano': 'NANO',
+    'zilliqa': 'ZIL',
+    'digibyte': 'DGB'
 }
 
 
