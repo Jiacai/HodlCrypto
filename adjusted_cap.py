@@ -31,6 +31,7 @@ mapping = {
     'omisego': 'OMG',
     'basic-attention-token': 'BAT',
     'qtum': 'QTUM',
+    'ontology': 'ONT'
 }
 
 
